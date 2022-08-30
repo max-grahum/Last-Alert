@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
 
     //References
     public PlayerController playerControllerRef;
+    //public PickUpController pickUpControllerRef;
 
     //Start is called before the first frame update
     void Start() {
@@ -31,6 +32,7 @@ public class GameController : MonoBehaviour {
         } else if (gameState == GameState.GAME) {
             playerControllerRef.MovePlayer();
             playerControllerRef.MoveCamera();
+            //pickUpControllerRef.TryMoveObject();
 
             //Example of teleporting the player
             if (Input.GetKey(KeyCode.L)) {
@@ -51,18 +53,18 @@ public class GameController : MonoBehaviour {
 
     //Actions which need to be done on the change state call
     public void ChangeGameState(GameState newGameState) {
-        if (gameState == GameState.STARTMENU) {
-            playerControllerRef.UnlockMouse();
-        } else if (gameState == GameState.SETTINGMENU) {
-            playerControllerRef.UnlockMouse();
+        if (newGameState == GameState.STARTMENU) {
+            MouseController.UnlockMouse();
+        } else if (newGameState == GameState.SETTINGMENU) {
+            MouseController.UnlockMouse();
             PauseGame();
-        } else if (gameState == GameState.CUTSCENE) {
-        } else if (gameState == GameState.TUTORIAL) {
-            playerControllerRef.LockMouse();
-        } else if (gameState == GameState.GAME) {
-            playerControllerRef.LockMouse();
-        } else if (gameState == GameState.FINISHMENU) {
-            playerControllerRef.UnlockMouse();
+        } else if (newGameState == GameState.CUTSCENE) {
+        } else if (newGameState == GameState.TUTORIAL) {
+            MouseController.LockMouse();
+        } else if (newGameState == GameState.GAME) {
+            MouseController.LockMouse();
+        } else if (newGameState == GameState.FINISHMENU) {
+            MouseController.UnlockMouse();
         }
         //Change state
         gameState = newGameState;

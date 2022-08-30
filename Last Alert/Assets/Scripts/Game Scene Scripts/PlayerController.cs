@@ -5,13 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour {
 
-    [Header("Couch")]
-    public float uncouchControllerHeight = 2;
-    public float couchControllerHeight = 1.5f;
-    public float uncouchCameraHeight = 1.5f;
-    public float couchCameraHeight = 1;
-    public float couchSpeedModifier = 0.5f;
-    public float couchTime = 1;
+    [Header("Crouch")]
+    public float uncrouchControllerHeight = 2;
+    public float crouchControllerHeight = 1.5f;
+    public float uncrouchCameraHeight = 1.5f;
+    public float crouchCameraHeight = 1;
+    public float crouchSpeedModifier = 0.5f;
+    public float crouchTime = 1;
 
     [Header("Movement")]
     public float walkSpeed = 5;
@@ -35,8 +35,9 @@ public class PlayerController : MonoBehaviour {
     private Vector3 moveVector = Vector3.zero;
     private float speed;
     private float cameraOffset = 0;
-    private Vector3 couchingVelocityV3 = Vector3.zero;
-    private float couchingVelocityF = 0;
+    private Vector3 crouchingVelocityV3 = Vector3.zero;
+    private float crouchingVelocityF = 0;
+    private bool isCrouching = false;
 
     void Start() {
         transformRef = GetComponent<Transform>();
@@ -44,30 +45,32 @@ public class PlayerController : MonoBehaviour {
     }
     
     public void MovePlayer() {
-        //Player couch
-        float couchSpeedMod = 1;
-        if (Input.GetKey(KeyboardController.couchKey)) {
+        //Player crouch
+        if (Input.GetKey(KeyboardController.crouchKey)) {
+            //Signal the player is crouching
+            isCrouching = true;
             //Update controller height and camera
-            controllerRef.height = Mathf.SmoothDamp(controllerRef.height, couchControllerHeight, ref couchingVelocityF, couchTime / 10);
-            cameraRef.transform.localPosition = Vector3.SmoothDamp(cameraRef.transform.localPosition, new Vector3(0, couchCameraHeight, 0), ref couchingVelocityV3, couchTime / 10);
-            //Update couch speed modifier
-            couchSpeedMod = couchSpeedModifier;
+            controllerRef.height = Mathf.SmoothDamp(controllerRef.height, crouchControllerHeight, ref crouchingVelocityF, crouchTime / 10);
+            cameraRef.transform.localPosition = Vector3.SmoothDamp(cameraRef.transform.localPosition, new Vector3(0, crouchCameraHeight, 0), ref crouchingVelocityV3, crouchTime / 10);
         } else {
             //Check if anything above player
-            if (SpaceAbovePlayer(new Vector3(0, couchControllerHeight, 0))) { //Middle
-                if (SpaceAbovePlayer(new Vector3(0.5f, couchControllerHeight, 0))) { //Left Top
-                    if (SpaceAbovePlayer(new Vector3(-0.5f, couchControllerHeight, 0))) { //Right Top
-                        if (SpaceAbovePlayer(new Vector3(0, couchControllerHeight, 0.5f))) { //Left Bottom
-                            if (SpaceAbovePlayer(new Vector3(0, couchControllerHeight, -0.5f))) { //Right Bottom
+            if (SpaceAbovePlayer(new Vector3(0, crouchControllerHeight, 0))) { //Middle
+                if (SpaceAbovePlayer(new Vector3(0.5f, crouchControllerHeight, 0))) { //Left Top
+                    if (SpaceAbovePlayer(new Vector3(-0.5f, crouchControllerHeight, 0))) { //Right Top
+                        if (SpaceAbovePlayer(new Vector3(0, crouchControllerHeight, 0.5f))) { //Left Bottom
+                            if (SpaceAbovePlayer(new Vector3(0, crouchControllerHeight, -0.5f))) { //Right Bottom
+                                //Signal the player is no longer crouching
+                                isCrouching = false;
                                 //Update controller height and camera
-                                controllerRef.height = Mathf.SmoothDamp(controllerRef.height, uncouchControllerHeight, ref couchingVelocityF, couchTime / 10);
-                                cameraRef.transform.localPosition = Vector3.SmoothDamp(cameraRef.transform.localPosition, new Vector3(0, uncouchCameraHeight, 0), ref couchingVelocityV3, couchTime / 10);
+                                controllerRef.height = Mathf.SmoothDamp(controllerRef.height, uncrouchControllerHeight, ref crouchingVelocityF, crouchTime / 10);
+                                cameraRef.transform.localPosition = Vector3.SmoothDamp(cameraRef.transform.localPosition, new Vector3(0, uncrouchCameraHeight, 0), ref crouchingVelocityV3, crouchTime / 10);
                             }
                         }
                     }
                 }
             }
         }
+
         //Update controller collider center
         controllerRef.center = new Vector3(0, controllerRef.height / 2, 0);
 
@@ -98,7 +101,9 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Apply movement modifiers (excluding mid air modifier)
-        speed = speed * couchSpeedMod;
+        if (isCrouching == true) {
+            speed = speed * crouchSpeedModifier;
+        }
 
         //Apply gravity
         moveVector = new Vector3(moveVector.x, moveVector.y - gravity * Time.deltaTime, moveVector.z);
@@ -111,7 +116,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private bool SpaceAbovePlayer(Vector3 pos) {
-        return !Physics.Raycast(transform.position + pos, Vector3.up, uncouchControllerHeight - couchControllerHeight + 0.1f);
+        return !Physics.Raycast(transform.position + pos, Vector3.up, uncrouchControllerHeight - crouchControllerHeight + 0.1f);
     }
 
     public void MoveCamera() {
@@ -180,13 +185,5 @@ public class PlayerController : MonoBehaviour {
     public void SetCameraAngle(Vector2 newAngle) {
         transform.rotation = Quaternion.Euler(0, newAngle.y, 0);
         cameraRef.transform.localRotation = Quaternion.Euler(newAngle.x, 0, 0);
-    }
-
-    public void LockMouse() {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    public void UnlockMouse() {
-        Cursor.lockState = CursorLockMode.None;
     }
 }

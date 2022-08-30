@@ -35,12 +35,12 @@ public class StartSceneController : MonoBehaviour {
 
     //Actions which need to be done on the change state call
     public void ChangeStartState(StartState newStartState) {
-        if (startState == StartState.STARTMENU) {
-
-        } else if (startState == StartState.SETTINGMENU) {
-
-        } else if (startState == StartState.CUTSCENE) {
-
+        if (newStartState == StartState.STARTMENU) {
+            MouseController.UnlockMouse();
+        } else if (newStartState == StartState.SETTINGMENU) {
+            MouseController.UnlockMouse();
+        } else if (newStartState == StartState.CUTSCENE) {
+            MouseController.UnlockMouse();
         }
         //Change state
         startState = newStartState;

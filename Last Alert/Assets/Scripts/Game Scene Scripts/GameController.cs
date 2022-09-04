@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
     //References
     public PlayerController playerControllerRef;
     //public PickUpController pickUpControllerRef;
+    public WinController winControllerRef;
 
     //Start is called before the first frame update
     void Start() {
@@ -19,9 +20,7 @@ public class GameController : MonoBehaviour {
 
     //Update is called once per frame
     void Update() {
-        if (gameState == GameState.STARTMENU) {
-
-        } else if (gameState == GameState.SETTINGMENU) {
+        if (gameState == GameState.SETTINGMENU) {
 
         } else if (gameState == GameState.CUTSCENE) {
 
@@ -30,17 +29,25 @@ public class GameController : MonoBehaviour {
             playerControllerRef.MoveCamera();
 
         } else if (gameState == GameState.GAME) {
+            //Move player
             playerControllerRef.MovePlayer();
             playerControllerRef.MoveCamera();
+
+            //Object pick up
             //pickUpControllerRef.TryMoveObject();
+
+            //Check for win
+            if (winControllerRef.CheckForWin()) {
+                GameWon();
+            }
+            
 
             //Example of teleporting the player
             if (Input.GetKey(KeyCode.L)) {
                 playerControllerRef.SetLocation(new Vector3(0, 0, 0));
-                playerControllerRef.SetCameraAngle(new Vector2(0, 0));
+                playerControllerRef.SetCameraAngle(new Vector2(0, 180));
             }
-
-
+            
             //Example code of scene switching to make sure it works
             if (Input.GetKeyDown(KeyCode.J)) {
                 SceneController.SwitchToStartScene();
@@ -53,9 +60,7 @@ public class GameController : MonoBehaviour {
 
     //Actions which need to be done on the change state call
     public void ChangeGameState(GameState newGameState) {
-        if (newGameState == GameState.STARTMENU) {
-            MouseController.UnlockMouse();
-        } else if (newGameState == GameState.SETTINGMENU) {
+        if (newGameState == GameState.SETTINGMENU) {
             MouseController.UnlockMouse();
             PauseGame();
         } else if (newGameState == GameState.CUTSCENE) {
@@ -73,11 +78,15 @@ public class GameController : MonoBehaviour {
     private void PauseGame() {
         //Pauses objects
     }
+
+    private void GameWon() {
+        ChangeGameState(GameState.FINISHMENU);
+        print("GAME WON");
+    }
 }
 
 //Game scene states
 public enum GameState {
-    STARTMENU,
     SETTINGMENU,
     CUTSCENE,
     TUTORIAL,

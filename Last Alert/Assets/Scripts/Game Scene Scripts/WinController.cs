@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class WinController : MonoBehaviour {
 
-    public Condition[] conditions;
+    [SerializeField]
+    private Condition[] conditions;
     
     public bool CheckForWin() {
         bool allCompleted = true;

@@ -9,18 +9,31 @@ public class GameController : MonoBehaviour {
 
     //References
     public PlayerController playerControllerRef;
-    //public PickUpController pickUpControllerRef;
+    public PickUpController pickUpControllerRef;
     public WinController winControllerRef;
+    public PickUpObjectManager pickUpObjectManagerRef; //Manages all pickup objects in the scene
 
     //Start is called before the first frame update
     void Start() {
-        //ChangeGameState(GameState.STARTMENU);
+        pickUpObjectManagerRef.GetAllPickUps();
         ChangeGameState(GameState.GAME);
     }
 
     //Update is called once per frame
     void Update() {
-        if (gameState == GameState.SETTINGMENU) {
+        if (gameState == GameState.PAUSEMENU) {
+            //Unpause game
+            if (Input.GetKeyDown(KeyboardController.pauseKey)) {
+                UnpauseGame();
+                ChangeGameState(GameState.GAME);
+            }
+
+        } else if (gameState == GameState.SETTINGMENU) {
+            //Unpause game
+            if (Input.GetKeyDown(KeyboardController.pauseKey)) {
+                UnpauseGame();
+                ChangeGameState(GameState.GAME);
+            }
 
         } else if (gameState == GameState.CUTSCENE) {
 
@@ -34,7 +47,13 @@ public class GameController : MonoBehaviour {
             playerControllerRef.MoveCamera();
 
             //Object pick up
-            //pickUpControllerRef.TryMoveObject();
+            pickUpControllerRef.TryMoveObject();
+
+            //Pause game
+            if (Input.GetKeyDown(KeyboardController.pauseKey)) {
+                PauseGame();
+                ChangeGameState(GameState.PAUSEMENU);
+            }
 
             //Check for win
             if (winControllerRef.CheckForWin()) {
@@ -54,16 +73,18 @@ public class GameController : MonoBehaviour {
             }
 
         } else if (gameState == GameState.FINISHMENU) {
-
+            pickUpControllerRef.DropObject(true);
         }
     }
 
     //Actions which need to be done on the change state call
     public void ChangeGameState(GameState newGameState) {
-        if (newGameState == GameState.SETTINGMENU) {
+        if (newGameState == GameState.PAUSEMENU) {
             MouseController.UnlockMouse();
-            PauseGame();
+        } else if (newGameState == GameState.SETTINGMENU) {
+            MouseController.UnlockMouse();
         } else if (newGameState == GameState.CUTSCENE) {
+
         } else if (newGameState == GameState.TUTORIAL) {
             MouseController.LockMouse();
         } else if (newGameState == GameState.GAME) {
@@ -75,8 +96,12 @@ public class GameController : MonoBehaviour {
         gameState = newGameState;
     }
 
-    private void PauseGame() {
-        //Pauses objects
+    public void PauseGame() {
+        pickUpObjectManagerRef.PauseAll();
+    }
+
+    public void UnpauseGame() {
+        pickUpObjectManagerRef.UnpauseAll();
     }
 
     private void GameWon() {
@@ -87,6 +112,7 @@ public class GameController : MonoBehaviour {
 
 //Game scene states
 public enum GameState {
+    PAUSEMENU,
     SETTINGMENU,
     CUTSCENE,
     TUTORIAL,

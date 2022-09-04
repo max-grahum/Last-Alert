@@ -16,4 +16,10 @@ public class WinController : MonoBehaviour {
         }
         return allCompleted;
     }
+
+    public void ResetConditions() {
+        foreach (Condition condition in conditions) {
+            condition.ResetCondition();
+        }
+    }
 }

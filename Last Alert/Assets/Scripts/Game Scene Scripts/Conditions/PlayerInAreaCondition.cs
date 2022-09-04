@@ -7,4 +7,8 @@ public class PlayerInAreaCondition : Condition {
             completed = true;
         }
     }
+
+    public override void ResetCondition() {
+        completed = false;
+    }
 }

@@ -12,4 +12,8 @@ public class ItemCollectedCondition : Condition {
             }
         }
     }
+
+    public override void ResetCondition() {
+        completed = false;
+    }
 }

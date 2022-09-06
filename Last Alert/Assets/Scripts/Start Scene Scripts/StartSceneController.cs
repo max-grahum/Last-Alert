@@ -14,12 +14,12 @@ public class StartSceneController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        ChangeStartState(StartState.STARTMENU);
+        ChangeStartState(StartState.HOMEMENU);
     }
 
     // Update is called once per frame
     void Update() {
-        if (startState == StartState.STARTMENU) {
+        if (startState == StartState.HOMEMENU) {
 
             //Example code of scene switching to make sure it works
             if (Input.GetKeyDown(KeyCode.J)) {
@@ -35,7 +35,7 @@ public class StartSceneController : MonoBehaviour {
 
     //Actions which need to be done on the change state call
     public void ChangeStartState(StartState newStartState) {
-        if (newStartState == StartState.STARTMENU) {
+        if (newStartState == StartState.HOMEMENU) {
             MouseController.UnlockMouse();
         } else if (newStartState == StartState.SETTINGMENU) {
             MouseController.UnlockMouse();
@@ -45,11 +45,16 @@ public class StartSceneController : MonoBehaviour {
         //Change state
         startState = newStartState;
     }
+    
+    public void TestButton()
+    {
+        Debug.Log("Button Clicked");
+    }
 }
 
 //Start scene states
 public enum StartState {
-    STARTMENU,
+    HOMEMENU,
     SETTINGMENU,
     CUTSCENE
 }

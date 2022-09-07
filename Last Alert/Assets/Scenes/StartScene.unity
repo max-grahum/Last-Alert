@@ -1251,8 +1251,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SETTINGS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 265e123cc9cccdb4087ffb7e0db248c8, type: 2}
-  m_sharedMaterial: {fileID: -1883284917975172522, guid: 265e123cc9cccdb4087ffb7e0db248c8,
+  m_fontAsset: {fileID: 11400000, guid: 7814930e9d6b6fa4b9dd325d44c7f549, type: 2}
+  m_sharedMaterial: {fileID: 2112882234596147688, guid: 7814930e9d6b6fa4b9dd325d44c7f549,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1413,7 +1413,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 985126246}
         m_TargetAssemblyTypeName: StartSceneController, Assembly-CSharp
-        m_MethodName: TestButton
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1657,8 +1657,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 265e123cc9cccdb4087ffb7e0db248c8, type: 2}
-  m_sharedMaterial: {fileID: -1883284917975172522, guid: 265e123cc9cccdb4087ffb7e0db248c8,
+  m_fontAsset: {fileID: 11400000, guid: 7814930e9d6b6fa4b9dd325d44c7f549, type: 2}
+  m_sharedMaterial: {fileID: 2112882234596147688, guid: 7814930e9d6b6fa4b9dd325d44c7f549,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1868,7 +1868,7 @@ GameObject:
   - component: {fileID: 1647936964}
   - component: {fileID: 1647936963}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2288,8 +2288,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CONTINUE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 265e123cc9cccdb4087ffb7e0db248c8, type: 2}
-  m_sharedMaterial: {fileID: -1883284917975172522, guid: 265e123cc9cccdb4087ffb7e0db248c8,
+  m_fontAsset: {fileID: 11400000, guid: 7814930e9d6b6fa4b9dd325d44c7f549, type: 2}
+  m_sharedMaterial: {fileID: 2112882234596147688, guid: 7814930e9d6b6fa4b9dd325d44c7f549,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2634,8 +2634,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: NEW GAME
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 265e123cc9cccdb4087ffb7e0db248c8, type: 2}
-  m_sharedMaterial: {fileID: -1883284917975172522, guid: 265e123cc9cccdb4087ffb7e0db248c8,
+  m_fontAsset: {fileID: 11400000, guid: 7814930e9d6b6fa4b9dd325d44c7f549, type: 2}
+  m_sharedMaterial: {fileID: 2112882234596147688, guid: 7814930e9d6b6fa4b9dd325d44c7f549,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

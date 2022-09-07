@@ -46,6 +46,11 @@ public class StartSceneController : MonoBehaviour {
         startState = newStartState;
     }
     
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     public void TestButton()
     {
         Debug.Log("Button Clicked");

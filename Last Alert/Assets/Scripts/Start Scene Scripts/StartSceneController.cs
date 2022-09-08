@@ -6,9 +6,11 @@ public class StartSceneController : MonoBehaviour {
     //Game state
     public StartState startState;
 
+    //Settings reference
+    public GameObject settingsUI;
+
     //References
     //UI controller reference
-    //Setting reference
     //etc. etc..
 
 
@@ -45,15 +47,40 @@ public class StartSceneController : MonoBehaviour {
         //Change state
         startState = newStartState;
     }
-    
+
+    //New Game Button
+    public void NewGame()
+    {
+        //ChangeStartState(StartState.CUTSCENE);
+        SceneController.SwitchToGameScene();
+    }
+
+    //Continue Button
+    public void ContinueGame()
+    {
+        //continues game from last checkpoint save (if available)
+        Debug.Log("Continue");
+    }
+
+    //Settings Button
+    public void OpenSettings()
+    {
+        //ChangeStartState(StartState.SETTINGMENU);
+        settingsUI.SetActive(true);
+    }
+
+    //temporary button to return to home menu for testing
+    public void CloseSettings()
+    {
+        //ChangeStartState(StartState.HOMEMENU);
+        settingsUI.SetActive(false);
+    }
+
+    //Quit Button
     public void Quit()
     {
         Application.Quit();
-    }
-
-    public void TestButton()
-    {
-        Debug.Log("Button Clicked");
+        Debug.Log("Quit");
     }
 }
 

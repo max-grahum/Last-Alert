@@ -2,75 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Item))]
 public class PickUp : MonoBehaviour {
 
-    //Start position and rotation
-    private Vector3 startPos;
-    private Quaternion startRot;
-    //Reference to the rigidbody if any
-    [HideInInspector]
-    public Rigidbody rigidbodyRef;
-    //Start kinematic value
-    private bool kinematic;
-    //Pause rigidbody velocity
-    private Vector3 velocity;
     //Used to stop un/pausing while held by the pick up controller
     [HideInInspector]
     public bool held = false;
+    //Reference to the objects rigidbody if any
+    [HideInInspector]
+    public Rigidbody rigidbodyRef;
+    //Reference to the objects item script
+    private Item itemRef;
 
     void Start() {
         //Get rigidbody
         rigidbodyRef = GetComponent<Rigidbody>();
-        //Save start data
-        UpdateStartData();
+        //Get item script
+        itemRef = GetComponent<Item>();
     }
 
+    //Call the item reset function
     public void ResetPickUp() {
-        //Pause physics
-        if (rigidbodyRef != null) {
-            rigidbodyRef.isKinematic = true;
-        }
-
-        //Move object to start location and rotation
-        transform.position = startPos;
-        transform.rotation = startRot;
-
-        //Set physics to start value
-        if (rigidbodyRef != null) {
-            rigidbodyRef.isKinematic = kinematic;
-        }
-    }
-
-    public void Pause() {
-        //Don't pause if held
-        if (held == true) {
-            return;
-        }
-        if (rigidbodyRef != null) {
-            //Save velocity and set kinematic to true
-            velocity = rigidbodyRef.velocity;
-            rigidbodyRef.isKinematic = true;
-        }
-    }
-
-    public void Unpause() {
-        //Don't unpause if held
-        if (held == true) {
-            return;
-        }
-        if (rigidbodyRef != null) {
-            //Set velocity and set kinematic to false
-            rigidbodyRef.isKinematic = false;
-            rigidbodyRef.velocity = velocity;
-        }
-    }
-
-    public void UpdateStartData() {
-        //Save pos and rot
-        startPos = transform.position;
-        startRot = transform.rotation;
-        if (rigidbodyRef != null) {
-            kinematic = rigidbodyRef.isKinematic;
-        }
+        itemRef.ResetPickUp();
     }
 }

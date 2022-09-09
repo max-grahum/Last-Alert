@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUpObjectManager : MonoBehaviour {
-    private PickUp[] pickUpObjects;
+    private Item[] pickUpObjects;
 
     public void GetAllPickUps() {
-        pickUpObjects = FindObjectsOfType<PickUp>();
+        pickUpObjects = FindObjectsOfType<Item>();
     }
 
     //Pause all pickups
     public void PauseAll() {
-        foreach (PickUp pickUp in pickUpObjects) {
+        foreach (Item pickUp in pickUpObjects) {
             pickUp.Pause();
         }
     }
 
     //Unpause all pickups
     public void UnpauseAll() {
-        foreach (PickUp pickUp in pickUpObjects) {
+        foreach (Item pickUp in pickUpObjects) {
             pickUp.Unpause();
         }
     }

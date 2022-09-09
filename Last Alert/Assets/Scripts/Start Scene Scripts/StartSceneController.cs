@@ -6,6 +6,9 @@ public class StartSceneController : MonoBehaviour {
     //Game state
     public StartState startState;
 
+    //Home reference
+    public GameObject homeMenu;
+
     //Settings reference
     public GameObject settingsUI;
 
@@ -39,8 +42,14 @@ public class StartSceneController : MonoBehaviour {
     public void ChangeStartState(StartState newStartState) {
         if (newStartState == StartState.HOMEMENU) {
             MouseController.UnlockMouse();
+            homeMenu.SetActive(true);
+            settingsUI.SetActive(false);
+
         } else if (newStartState == StartState.SETTINGMENU) {
             MouseController.UnlockMouse();
+            settingsUI.SetActive(true);
+            homeMenu.SetActive(false);
+
         } else if (newStartState == StartState.CUTSCENE) {
             MouseController.UnlockMouse();
         }
@@ -51,7 +60,6 @@ public class StartSceneController : MonoBehaviour {
     //New Game Button
     public void NewGame()
     {
-        //ChangeStartState(StartState.CUTSCENE);
         SceneController.SwitchToGameScene();
     }
 
@@ -65,15 +73,13 @@ public class StartSceneController : MonoBehaviour {
     //Settings Button
     public void OpenSettings()
     {
-        //ChangeStartState(StartState.SETTINGMENU);
-        settingsUI.SetActive(true);
+        ChangeStartState(StartState.SETTINGMENU);
     }
 
     //temporary button to return to home menu for testing
     public void CloseSettings()
     {
-        //ChangeStartState(StartState.HOMEMENU);
-        settingsUI.SetActive(false);
+        ChangeStartState(StartState.HOMEMENU);
     }
 
     //Quit Button

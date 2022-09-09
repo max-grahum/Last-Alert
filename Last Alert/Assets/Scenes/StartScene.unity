@@ -1257,6 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startState: 0
+  homeMenu: {fileID: 834484298}
   settingsUI: {fileID: 922406112}
 --- !u!1001 &1012021631
 PrefabInstance:

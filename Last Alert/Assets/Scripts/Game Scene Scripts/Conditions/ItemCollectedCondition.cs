@@ -21,7 +21,6 @@ public class ItemCollectedCondition : Condition {
     }
 
     private void OnTriggerEnter(Collider other) {
-        print("triggered");
         foreach (GameObject item in itemWanted) {
             if (item == other.gameObject) {
                 completed = true;

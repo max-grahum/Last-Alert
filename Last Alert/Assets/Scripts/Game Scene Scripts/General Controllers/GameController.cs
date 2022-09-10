@@ -11,11 +11,11 @@ public class GameController : MonoBehaviour {
     public PlayerController playerControllerRef;
     public PickUpController pickUpControllerRef;
     public WinController winControllerRef;
-    public PickUpObjectManager pickUpObjectManagerRef; //Manages all pickup objects in the scene
+    public ItemManager itemManagerRef; //Manages all pickup objects in the scene
 
     //Start is called before the first frame update
     void Start() {
-        pickUpObjectManagerRef.GetAllPickUps();
+        itemManagerRef.GetAllPickUps();
         ChangeGameState(GameState.GAME);
     }
 
@@ -79,6 +79,25 @@ public class GameController : MonoBehaviour {
 
     //Actions which need to be done on the change state call
     public void ChangeGameState(GameState newGameState) {
+        //BEFORE CHANGE
+        if (gameState == GameState.PAUSEMENU) {
+
+        } else if (gameState == GameState.SETTINGMENU) {
+
+        } else if (gameState == GameState.CUTSCENE) {
+
+        } else if (gameState == GameState.TUTORIAL) {
+
+        } else if (gameState == GameState.GAME) {
+
+        } else if (gameState == GameState.FINISHMENU) {
+
+        }
+
+        //CHANGE
+        gameState = newGameState;
+
+        //AFTER CHANGE
         if (newGameState == GameState.PAUSEMENU) {
             MouseController.UnlockMouse();
         } else if (newGameState == GameState.SETTINGMENU) {
@@ -92,16 +111,14 @@ public class GameController : MonoBehaviour {
         } else if (newGameState == GameState.FINISHMENU) {
             MouseController.UnlockMouse();
         }
-        //Change state
-        gameState = newGameState;
     }
 
     public void PauseGame() {
-        pickUpObjectManagerRef.PauseAll();
+        itemManagerRef.PauseAll();
     }
 
     public void UnpauseGame() {
-        pickUpObjectManagerRef.UnpauseAll();
+        itemManagerRef.UnpauseAll();
     }
 
     private void GameWon() {

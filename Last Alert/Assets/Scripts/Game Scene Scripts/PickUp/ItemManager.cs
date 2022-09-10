@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpObjectManager : MonoBehaviour {
+public class ItemManager : MonoBehaviour {
     private Item[] pickUpObjects;
 
     public void GetAllPickUps() {

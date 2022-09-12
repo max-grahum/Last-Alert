@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour {
     private bool isCrouching = false;
 
     void Start() {
+        loadPlayer();
+
         transformRef = GetComponent<Transform>();
         controllerRef = GetComponent<CharacterController>();
     }
@@ -185,5 +187,28 @@ public class PlayerController : MonoBehaviour {
     public void SetCameraAngle(Vector2 newAngle) {
         transform.rotation = Quaternion.Euler(0, newAngle.y, 0);
         cameraRef.transform.localRotation = Quaternion.Euler(newAngle.x, 0, 0);
+    }
+
+
+
+    public void savePlayer(){
+        print("player saved");
+        SaveSystem.save(transform);
+    }
+
+    public void loadPlayer(){
+        print("player data loading...");
+        PlayerData data = SaveSystem.load();
+        if(data == null){
+            savePlayer();
+            data = SaveSystem.load();
+        }
+
+        Vector3 position;
+        position.x = data.position[0];
+        position.y = data.position[1];
+        position.z = data.position[2];
+
+        SetLocation(position);
     }
 }

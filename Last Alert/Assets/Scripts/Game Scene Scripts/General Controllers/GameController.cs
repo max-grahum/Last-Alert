@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
     public PickUpController pickUpControllerRef;
     public WinController winControllerRef;
     public ItemManager itemManagerRef; //Manages all pickup objects in the scene
+    public GameObject pauseScreen;
+    public GameObject settingsUI;
 
     //Start is called before the first frame update
     void Start() {
@@ -25,14 +27,12 @@ public class GameController : MonoBehaviour {
             //Unpause game
             if (Input.GetKeyDown(KeyboardController.pauseKey)) {
                 UnpauseGame();
-                ChangeGameState(GameState.GAME);
             }
 
         } else if (gameState == GameState.SETTINGMENU) {
             //Unpause game
             if (Input.GetKeyDown(KeyboardController.pauseKey)) {
                 UnpauseGame();
-                ChangeGameState(GameState.GAME);
             }
 
         } else if (gameState == GameState.CUTSCENE) {
@@ -52,7 +52,6 @@ public class GameController : MonoBehaviour {
             //Pause game
             if (Input.GetKeyDown(KeyboardController.pauseKey)) {
                 PauseGame();
-                ChangeGameState(GameState.PAUSEMENU);
             }
 
             //Check for win
@@ -99,26 +98,59 @@ public class GameController : MonoBehaviour {
 
         //AFTER CHANGE
         if (newGameState == GameState.PAUSEMENU) {
+            pauseScreen.SetActive(true);
+            settingsUI.SetActive(false);
             MouseController.UnlockMouse();
         } else if (newGameState == GameState.SETTINGMENU) {
+            settingsUI.SetActive(true);
+            pauseScreen.SetActive(false);
             MouseController.UnlockMouse();
         } else if (newGameState == GameState.CUTSCENE) {
 
         } else if (newGameState == GameState.TUTORIAL) {
             MouseController.LockMouse();
         } else if (newGameState == GameState.GAME) {
+            pauseScreen.SetActive(false);
+            settingsUI.SetActive(false);
             MouseController.LockMouse();
         } else if (newGameState == GameState.FINISHMENU) {
             MouseController.UnlockMouse();
         }
     }
 
+    //Pause functions
     public void PauseGame() {
+        ChangeGameState(GameState.PAUSEMENU);
         itemManagerRef.PauseAll();
     }
 
     public void UnpauseGame() {
+        ChangeGameState(GameState.GAME);
         itemManagerRef.UnpauseAll();
+    }
+
+    //Resume Button
+    public void ResumeGame()
+    {
+        UnpauseGame();
+    }
+
+    //Settings Button
+    public void OpenSettings()
+    {
+        ChangeGameState(GameState.SETTINGMENU);
+    }
+
+    //temporary button to return to pause menu for testing
+    public void CloseSettings()
+    {
+        ChangeGameState(GameState.PAUSEMENU);
+    }
+
+    //Exit Button
+    public void Exit()
+    {
+        SceneController.SwitchToStartScene();
     }
 
     private void GameWon() {

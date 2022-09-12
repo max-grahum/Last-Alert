@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1462304361655126043}
   - component: {fileID: 1462304361655126041}
   - component: {fileID: 1462304361655126022}
+  - component: {fileID: 766560269569126085}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,12 +65,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740fdf08f772ed14d9de9f9cd322df19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uncouchControllerHeight: 2
-  couchControllerHeight: 1.5
-  uncouchCameraHeight: 1.5
-  couchCameraHeight: 1
-  couchSpeedModifier: 0.5
-  couchTime: 1
+  uncrouchControllerHeight: 2
+  crouchControllerHeight: 1.5
+  uncrouchCameraHeight: 1.5
+  crouchCameraHeight: 1
+  crouchSpeedModifier: 0.5
+  crouchTime: 1
   walkSpeed: 5
   runSpeed: 8
   jumpSpeed: 10
@@ -81,6 +82,22 @@ MonoBehaviour:
   mouseXInverted: 0
   mouseYInverted: 0
   pushForce: 0.5
+--- !u!114 &766560269569126085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462304361655126042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51291165de58add4b9a398bf09e17029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdingObject: 0
+  pickUpDistance: 5
+  objectHolderRef: {fileID: 3836816210251655848}
+  cameraRef: {fileID: 1462304361688584945}
 --- !u!1 &1462304361688584945
 GameObject:
   m_ObjectHideFlags: 0

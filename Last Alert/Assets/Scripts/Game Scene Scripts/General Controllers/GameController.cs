@@ -169,6 +169,25 @@ public class GameController : MonoBehaviour {
     public void GameOver() {
         ChangeGameState(GameState.GAMEOVER);
     }
+
+    public void saveData(){
+        playerControllerRef.savePlayer();
+    }
+
+    public void loadData(){
+        playerControllerRef.loadPlayer();
+
+        if(playerControllerRef != null){
+            print("SaveExists data loading...");
+            PlayerData data = SaveSystem.load();
+            if(data == null){
+                SaveSystem.save(playerControllerRef.transform, false);
+                data = SaveSystem.load();
+            }
+            
+            bool yeet = data.saveExists;
+        }
+    }
 }
 
 //Game scene states

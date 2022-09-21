@@ -40,14 +40,14 @@ public class PlayerController : MonoBehaviour {
     private bool isCrouching = false;
 
     [Header("Saving")]
-    public bool enableSaving = false;
-    public bool enableLoading = false;
+    public bool enableSaving = true;
+    public bool enableLoading = true;
 
     void Start() {
-        //loadPlayer();
-        
         transformRef = GetComponent<Transform>();
         controllerRef = GetComponent<CharacterController>();
+
+        loadPlayer();
     }
     
     public void MovePlayer() {
@@ -198,8 +198,8 @@ public class PlayerController : MonoBehaviour {
 
     public void savePlayer(){
         if(enableSaving){
-            print("player saved");
-            SaveSystem.save(transform);
+            print("player data saved...");
+            SaveSystem.save(transform, true);
         }
     }
 
@@ -208,7 +208,7 @@ public class PlayerController : MonoBehaviour {
             print("player data loading...");
             PlayerData data = SaveSystem.load();
             if(data == null){
-                SaveSystem.save(transform);
+                SaveSystem.save(transform, true);
                 data = SaveSystem.load();
             }
 
@@ -218,7 +218,6 @@ public class PlayerController : MonoBehaviour {
             position.z = data.position[2];
 
             if(position != null){
-                print("yeet");
                 SetLocation(position);
             }
         }

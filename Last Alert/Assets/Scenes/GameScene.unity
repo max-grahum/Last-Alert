@@ -5008,12 +5008,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: BackgroundAmbience
-    clip: {fileID: 0}
-    volume: 0.731
+    clip: {fileID: 8300000, guid: ad403fe5cb1141c4db962f01954ad170, type: 3}
+    volume: 0.1
     pitch: 1
     source: {fileID: 0}
-    playOnAwake: 0
-    loop: 0
+    playOnAwake: 1
+    loop: 1
 --- !u!4 &2048929185
 Transform:
   m_ObjectHideFlags: 0

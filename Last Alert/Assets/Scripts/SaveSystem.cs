@@ -43,7 +43,7 @@ public static class SaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-            
+
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
 
             stream.Close();

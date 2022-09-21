@@ -827,12 +827,12 @@ PrefabInstance:
     - target: {fileID: 1462304361655126022, guid: d4abac05ca29092499c0df3ca3611b9f,
         type: 3}
       propertyPath: enableSaving
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1462304361655126022, guid: d4abac05ca29092499c0df3ca3611b9f,
         type: 3}
       propertyPath: enableLoading
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1462304361655126042, guid: d4abac05ca29092499c0df3ca3611b9f,
         type: 3}
@@ -1074,9 +1074,9 @@ MonoBehaviour:
   entered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: savePlayer
+      - m_Target: {fileID: 1916074310}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: saveData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1202,9 +1202,9 @@ MonoBehaviour:
   entered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: savePlayer
+      - m_Target: {fileID: 1916074310}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: saveData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2924,6 +2924,8 @@ MonoBehaviour:
   itemManagerRef: {fileID: 1235753077}
   pauseScreen: {fileID: 1044889024}
   settingsUI: {fileID: 1944648480}
+  gameWinScreen: {fileID: 1944648480}
+  gameOverScreen: {fileID: 1944648480}
 --- !u!4 &1916074311
 Transform:
   m_ObjectHideFlags: 0
@@ -3384,9 +3386,9 @@ MonoBehaviour:
   entered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: savePlayer
+      - m_Target: {fileID: 1916074310}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: saveData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

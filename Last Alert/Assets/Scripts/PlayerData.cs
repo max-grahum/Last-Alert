@@ -8,12 +8,16 @@ using UnityEngine;
 public class PlayerData
 {
     public float[] position;
+    public bool saveExists;
 
     public float timer;
 
     //constructor
-    public PlayerData(Transform player){
+    public PlayerData(Transform player, bool saveExists){
         this.position = new float[3];
+
+        this.saveExists = true;
+
         this.position[0] = player.position.x;
         this.position[1] = player.position.y;
         this.position[2] = player.position.z;

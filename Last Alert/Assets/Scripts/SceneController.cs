@@ -20,4 +20,12 @@ public class SceneController {
             SceneManager.LoadScene("GameScene");
         }
     }
+
+    public static void SwitchToTutorialScene() {
+        //Make sure not already on the game scene
+        if (SceneManager.GetActiveScene().name != "TutorialScene") {
+            //Switch to the game scene
+            SceneManager.LoadScene("TutorialScene");
+        }
+    }
 }

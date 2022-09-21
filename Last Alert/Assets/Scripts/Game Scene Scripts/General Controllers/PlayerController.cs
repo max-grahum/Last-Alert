@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour {
     public bool enableLoading = false;
 
     void Start() {
-        loadPlayer();
+        //loadPlayer();
         
         transformRef = GetComponent<Transform>();
         controllerRef = GetComponent<CharacterController>();

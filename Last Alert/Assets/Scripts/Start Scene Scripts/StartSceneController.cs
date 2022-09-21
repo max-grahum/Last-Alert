@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StartSceneController : MonoBehaviour {
-    //Game state
+    //Start state
     public StartState startState;
 
     //Home reference
@@ -58,33 +58,29 @@ public class StartSceneController : MonoBehaviour {
     }
 
     //New Game Button
-    public void NewGame()
-    {
-        SceneController.SwitchToGameScene();
+    public void NewGame() {
+        //SceneController.SwitchToGameScene();
+        SceneController.SwitchToTutorialScene();
     }
 
     //Continue Button
-    public void ContinueGame()
-    {
+    public void ContinueGame() {
         //continues game from last checkpoint save (if available)
         Debug.Log("Continue");
     }
 
     //Settings Button
-    public void OpenSettings()
-    {
+    public void OpenSettings() {
         ChangeStartState(StartState.SETTINGMENU);
     }
 
     //temporary button to return to home menu for testing
-    public void CloseSettings()
-    {
+    public void CloseSettings() {
         ChangeStartState(StartState.HOMEMENU);
     }
 
     //Quit Button
-    public void Quit()
-    {
+    public void Quit() {
         Application.Quit();
         Debug.Log("Quit");
     }
